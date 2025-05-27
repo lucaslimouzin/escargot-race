@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Course d'Escargots</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- Écran de jeu -->
+        <div id="game-ui" class="hidden">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-labels">
+                    <span>Départ</span>
+                    <span>Arrivée</span>
+                </div>
+            </div>
+            <div class="tap-indicator">
+                <div class="tap-icon">👆</div>
+                <div class="tap-text">TAPOTEZ !</div>
+            </div>
+        </div>
+
+        <!-- Écran de démarrage -->
+        <div id="start-screen" class="screen">
+            <div class="title-container">
+                <div class="logo">
+                    <img src="escargot_idle.png" alt="Logo Escargot" class="logo-image">
+                </div>
+                <h1 class="game-title">Course d'Escargots</h1>
+                <div class="subtitle">La course la plus lente du monde !</div>
+            </div>
+            <div class="instructions-container">
+                <p class="instructions">
+                    <span class="instruction-icon">👆</span> Tapotez rapidement sur l'écran<br>
+                    <span class="instruction-icon">⌨️</span> ou appuyez sur la touche ESPACE<br>
+                    pour faire avancer votre escargot !
+                </p>
+            </div>
+            <button id="startButton" class="glow-button">Commencer la Course</button>
+        </div>
+
+        <!-- Écran de fin -->
+        <div id="game-over-screen" class="screen hidden">
+            <div class="result-container">
+                <h2 id="winner-text"></h2>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Parties jouées</span>
+                        <span id="games-played" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Victoires</span>
+                        <span id="wins-count" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Taux de victoire</span>
+                        <span id="win-rate" class="stat-value">0%</span>
+                    </div>
+                </div>
+            </div>
+            <button id="restartButton" class="glow-button">Rejouer</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 
