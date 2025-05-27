@@ -119,6 +119,7 @@ class SnailRaceGame {
         this.startScreen.classList.add('hidden');
         this.gameOverScreen.classList.add('hidden');
         this.gameUI.classList.remove('hidden');
+        this.gameStartTime = Date.now();
         this.animate();
     }
 
@@ -257,9 +258,17 @@ class SnailRaceGame {
             // Vérifier si un escargot a gagné
             if (snail.x >= this.finishLine) {
                 this.isGameRunning = false;
-                this.gameOverScreen.classList.remove('hidden');
-                this.winnerText.textContent = snail.isPlayer ? 'Vous avez gagné !' : 'Un adversaire a gagné !';
-                this.updateAIDifficulty();
+                this.gameUI.classList.add('hidden');
+                this.gamesPlayed++;
+                if (snail.isPlayer) {
+                    this.gamesWon++;
+                    const currentTime = (Date.now() - this.gameStartTime) / 1000;
+                    this.totalTime += currentTime;
+                    if (currentTime < this.bestTime) {
+                        this.bestTime = currentTime;
+                    }
+                }
+                this.showGameOverScreen(snail.isPlayer ? 'player' : 'ai');
             }
         });
 
@@ -315,6 +324,7 @@ class SnailRaceGame {
         const bestTimeStr = this.bestTime === Infinity ? '-' : this.bestTime.toFixed(1);
 
         document.getElementById('games-played').textContent = this.gamesPlayed;
+        document.getElementById('wins-count').textContent = this.gamesWon;
         document.getElementById('win-rate').textContent = `${winRate}%`;
         document.getElementById('best-time').textContent = bestTimeStr;
         document.getElementById('avg-time').textContent = avgTime;
@@ -327,7 +337,6 @@ class SnailRaceGame {
     }
 
     restartGame() {
-        this.gamesPlayed++;
         this.startGame();
     }
 }
